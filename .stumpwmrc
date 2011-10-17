@@ -1,0 +1,171 @@
+; -*-lisp-*-
+
+;; Imports:
+;; http://prael.wordpress.com
+;; Stumpwm manual
+;; stumpwm.svkt.org::batman
+;; shihpin tseng
+
+;; Declare what this file is for
+(in-package :stumpwm)
+(setf *startup-message* nil)
+(setf *startup-message* "I will fly beyond the gates of space and time, another universe is mine, i will dive into the black hole")
+;(setf *default-package* :stumpwm)
+
+;; MODULES
+(set-contrib-dir "~/.stumpwm")
+;(load "~/.stumpwm/surfraw.lisp")
+;(load "~/.stumpwm/cpu.lisp")
+(load "~/.stumpwm/amixer.lisp")
+
+;; VARIABLES
+(defparameter *foreground-color* "green")
+(defparameter *background-color* "black")
+(defparameter *border-color* "grey")
+(defparameter *border-color-2* "green")
+
+;; FUNCTIONS
+(defun cat (&rest strings) "A shortcut for (concatenate 'string foo bar)."
+  (apply 'concatenate 'string strings))
+
+;; COMMANDS
+
+;;; MESSAGE WINDOW
+;; colors
+(set-fg-color *foreground-color*)
+(set-bg-color *background-color*)
+(set-border-color *border-color-2*)
+;; properties
+(set-font "-*-clean-medium-r-normal-*-17-*-*-*-*-*-*-*")
+(set-msg-border-width 2)
+(setf *message-window-padding* 2)
+(setf *message-window-gravity* :top-right)
+(setf  *input-window-gravity* :bottom-right)
+
+;; GROUPS
+(setf *group-format* "^B%t^b")
+;; rename first group
+(setf (group-name (first (screen-groups (current-screen)))) "www")
+(run-commands "gnewbg torrent" "gnewbg hack" "gnewbg chat")
+
+;; WINDOWS
+;; colors
+(set-focus-color *foreground-color*)
+(set-unfocus-color *background-color*)
+(set-win-bg-color *border-color*)
+;; properties
+(setf *window-format* "^20[%n]^B%t^b")
+(setf *window-name-source* :title)
+(setf *window-border-style* :tight)
+;; borders
+(setf *maxsize-border-width* 0)
+(setf *transient-border-width* 1)
+(setf *normal-border-width* 0)
+;; Makes frames and windows 1-indexed
+(setf *frame-number-map* "1234567890")
+(setf *window-number-map* "1234567890")
+;; Clear rules;
+(clear-window-placement-rules)
+
+;; ;; MODE-LINE
+;; (mode-line)
+;; (setf *mode-line-background-color* *background-color*)
+;; (setf *mode-line-foreground-color* *foreground-color*)
+;; (setf *mode-line-border-color*     *border-color*)
+;; (setf *mode-line-timeout*          15)
+;; (setf *mode-line-position* :top)
+;; (setf *screen-mode-line-format* (list "(%g) %W "
+;; 				      "| %c %t" ))
+;; ;(setf *screen-mode-line-format* (list "((%n %w) ("
+;; ;				      `(:eval (format-time-string))
+;; ;				      ") ()"))
+;; (setf *mode-line-pad-x* 1)
+;; (setf *mode-line-pad-x* 1)
+;; ;; turn on/off the mode line for the current screen only.
+;; (if (not (head-mode-line (current-head)))
+;;      (toggle-mode-line (current-screen) (current-head)))
+
+
+;; X cursor
+
+;; Prefix key
+(set-prefix-key (kbd "C-a"))
+;; Custom keybindings
+(define-key *top-map* (kbd "s-m") "fullscreen")
+(define-key *top-map* (kbd "s-RET") "exec urxvt")
+(define-key *top-map* (kbd "s-p") "exec runcom")
+(define-key *top-map* (kbd "s-b") "exec conkeror")
+(define-key *top-map* (kbd "s-e") "emacs")
+(define-key *top-map* (kbd "s-x") "colon")
+(define-key *top-map* (kbd "s-!") "exec")
+(define-key *top-map* (kbd "s-:") "eval")
+(define-key *top-map* (kbd "s-Left") "move-focus left")
+(define-key *top-map* (kbd "s-Right") "move-focus right")
+(define-key *top-map* (kbd "s-Up") "move-focus up")
+(define-key *top-map* (kbd "s-Down") "move-focus down")
+(define-key *top-map* (kbd "s-M-Left") "move-window left")
+(define-key *top-map* (kbd "s-M-Right") "move-window right")
+(define-key *top-map* (kbd "s-M-Up") "move-window up")
+(define-key *top-map* (kbd "s-M-Down") "move-window down")
+(define-key *top-map* (kbd "s-q") "remove")
+(define-key *top-map* (kbd "s-F1") "gselect 1")
+(define-key *top-map* (kbd "s-F2") "gselect 2")
+(define-key *top-map* (kbd "s-F3") "gselect 3")
+(define-key *top-map* (kbd "s-F4") "gselect 4")
+(define-key *top-map* (kbd "s-F5") "gselect 5")
+(define-key *top-map* (kbd "s-G") "vgroups")
+(define-key *top-map* (kbd "s-1") "select-window-by-number 1")
+(define-key *top-map* (kbd "s-2") "select-window-by-number 2")
+(define-key *top-map* (kbd "s-3") "select-window-by-number 3")
+(define-key *top-map* (kbd "s-4") "select-window-by-number 4")
+(define-key *top-map* (kbd "s-5") "select-window-by-number 5")
+(define-key *top-map* (kbd "s-6") "select-window-by-number 6")
+(define-key *top-map* (kbd "s-7") "select-window-by-number 7")
+(define-key *top-map* (kbd "s-8") "select-window-by-number 8")
+(define-key *top-map* (kbd "s-9") "select-window-by-number 9")
+(define-key *top-map* (kbd "s-0") "select-window-by-number 0")
+(define-key *top-map* (kbd "s-`") "windowlist")
+(define-key *top-map* (kbd "s-S") "hsplit")
+(define-key *top-map* (kbd "s-s") "vsplit")
+(define-key *top-map* (kbd "s-M") "mark")
+(define-key *top-map* (kbd "s-TAB") "prev")
+(define-key *top-map* (kbd "s-t") "title")
+(define-key *top-map* (kbd "s-quoteright") "select")
+(define-key *top-map* (kbd "XF86AudioLowerVolume")   "amixer-PCM-1-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume")   "amixer-PCM-1+")
+(define-key *top-map* (kbd "XF86AudioMute")          "amixer-PCM-toggle")
+
+;; ;; Emacs server integration 
+;; (defvar *es-win* nil
+;;   "to hold the window called emacsclient")
+;; (defun save-es-called-win ()
+;;   (setf *es-win* (current-window)))
+
+;; (defun return-es-called-win (win)
+;;   (let* ((group (window-group win))
+;; 	 (frame (window-frame win))
+;; 	 (old-frame (tile-group-current-frame group)))
+;;     (frame-raise-window group frame win)
+;;     (focus-all win)
+;;     (unless (eq frame old-frame)
+;;       (show-frame-indicator group))))
+
+;; GIMP
+;; svkt.org
+
+; Defining the layout
+;; #S(STUMPWM::GDUMP :NUMBER 2. :NAME "gimp"
+;;    :TREE
+;;    (((#S(STUMPWM::FDUMP :NUMBER 0. :X 0. :Y 0. :WIDTH 265.
+;; 			:HEIGHT 384. :WINDOWS nil :CURRENT nil)
+;;       #S(STUMPWM::FDUMP :NUMBER 1. :X 0. :Y 384. :WIDTH 265.
+;; 			:HEIGHT 384. :WINDOWS nil :CURRENT nil)
+;;       #S(STUMPWM::FDUMP :NUMBER 2. :X 265. :Y 0. :WIDTH 759.
+;; 			:HEIGHT 768. :WINDOWS nil :CURRENT nil)))
+;;     :CURRENT 1.))
+
+;; ; Define window placement rules
+;; ((#1="gimp" 0. t t :CLASS "Gimp" :INSTANCE "gimp" :ROLE "gimp-toolbox")
+;;  (#1# 1. t t :CLASS "Gimp" :INSTANCE "gimp" :ROLE "gimp-dock")
+;;  (#1# 2. t t :CLASS "Gimp" :INSTANCE "gimp"))
+      
