@@ -3,7 +3,6 @@
 (add-to-list 'load-path "~/elisp")
 (add-to-list 'load-path "~/elisp/theme")
 (add-to-list 'load-path "~/elisp/matlab-emacs")
-(server-start)
 (setq-default major-mode 'text-mode)
 
 ;; LATEX MODE
