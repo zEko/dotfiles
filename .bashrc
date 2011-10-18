@@ -8,7 +8,8 @@ PS1='\[\e[1m\]\u@\W \$ \[\e[m\]'
 
 ## Global Variables
 export PATH=$PATH:/home/$USER/.scripts/
-export EDITOR=emacs
+export EDITOR="emacsclient -c"
+export VISUAL="emacsclient -c"
 export TERM=rxvt-unicode
 
 ## Bash settings
@@ -17,7 +18,7 @@ export HISTCONTROL=ignoreboth
 ## Aliases
 alias ls='ls --color=auto -B'
 alias dc='cd'
-alias emacs='emacs -nw'
+alias emacs='emacsclient -t'
 
 #safety features
 alias cp='cp -i -v'
@@ -25,14 +26,11 @@ alias rm='rm -i -v'
 alias mv='mv -i -v'
 alias ln='ln -i -v'
 
-#Root powa
-alias supermacs='sudo emacs -nw'
-
 #easy access
 alias nano='emacs -nw'
 alias bounty='cd /bounty/BlackHole'
-alias bashrc='emacs ~/.bashrc'
-alias xresources='emacs ~/.Xresources'
+alias bashrc='emacsclient -c ~/.bashrc'
+alias xresources='emacsclient -c ~/.Xresources'
 alias music='ncmpcpp'
 alias pacs='yaourt -Ss'
 alias paci='yaourt -S'
